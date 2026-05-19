@@ -1,6 +1,4 @@
 from rest_framework import viewsets, permissions
-from rest_framework.decorators import api_view
-from rest_framework.response import Response
 from .models import User, Team, Activity, Workout, LeaderboardEntry
 from .serializers import UserSerializer, TeamSerializer, ActivitySerializer, WorkoutSerializer, LeaderboardEntrySerializer
 
@@ -28,21 +26,3 @@ class LeaderboardEntryViewSet(viewsets.ModelViewSet):
     queryset = LeaderboardEntry.objects.all().order_by('-score')
     serializer_class = LeaderboardEntrySerializer
     permission_classes = [permissions.IsAuthenticated]
-
-import os
-
-@api_view(['GET'])
-def api_root(request, format=None):
-    codespace_name = os.environ.get('CODESPACE_NAME')
-    if codespace_name:
-        base_url = f"https://{codespace_name}-8000.app.github.dev"
-    else:
-        # fallback for tests or local: use a placeholder to ensure -8000.app.github.dev is present
-        base_url = "https://placeholder-8000.app.github.dev"
-    return Response({
-        'users': f'{base_url}/api/users/',
-        'teams': f'{base_url}/api/teams/',
-        'activities': f'{base_url}/api/activities/',
-        'workouts': f'{base_url}/api/workouts/',
-        'leaderboard': f'{base_url}/api/leaderboard/',
-    })
