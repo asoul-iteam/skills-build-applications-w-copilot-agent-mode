@@ -10,7 +10,13 @@ const Users = () => {
     { header: 'Last Name', accessor: 'last_name' },
   ];
 
-  return <ResourceTablePage title="Users" endpoint="/api/users/" columns={columns} />;
+  return (
+    <ResourceTablePage
+      title="Users"
+      endpoint={`https://${process.env.REACT_APP_CODESPACE_NAME}-8000.app.github.dev/api/users/`}
+      columns={columns}
+    />
+  );
 };
 
 export default Users;

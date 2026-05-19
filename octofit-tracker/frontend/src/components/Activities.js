@@ -12,7 +12,13 @@ const Activities = () => {
     { header: 'Date', accessor: 'date' },
   ];
 
-  return <ResourceTablePage title="Activities" endpoint="/api/activities/" columns={columns} />;
+  return (
+    <ResourceTablePage
+      title="Activities"
+      endpoint={`https://${process.env.REACT_APP_CODESPACE_NAME}-8000.app.github.dev/api/activities/`}
+      columns={columns}
+    />
+  );
 };
 
 export default Activities;

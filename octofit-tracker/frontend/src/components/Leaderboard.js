@@ -27,7 +27,13 @@ const Leaderboard = () => {
     { header: 'Updated', accessor: 'updated_at' },
   ];
 
-  return <ResourceTablePage title="Leaderboard" endpoint="/api/leaderboard/" columns={columns} />;
+  return (
+    <ResourceTablePage
+      title="Leaderboard"
+      endpoint={`https://${process.env.REACT_APP_CODESPACE_NAME}-8000.app.github.dev/api/leaderboard/`}
+      columns={columns}
+    />
+  );
 };
 
 export default Leaderboard;

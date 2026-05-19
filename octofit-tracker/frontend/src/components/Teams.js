@@ -12,7 +12,13 @@ const Teams = () => {
     { header: 'Created', accessor: 'created_at' },
   ];
 
-  return <ResourceTablePage title="Teams" endpoint="/api/teams/" columns={columns} />;
+  return (
+    <ResourceTablePage
+      title="Teams"
+      endpoint={`https://${process.env.REACT_APP_CODESPACE_NAME}-8000.app.github.dev/api/teams/`}
+      columns={columns}
+    />
+  );
 };
 
 export default Teams;
