@@ -1,12 +1,14 @@
+from django.core.management import call_command
 from django.core.management.base import BaseCommand
 from django.contrib.auth import get_user_model
 
 from octofit_tracker.models import Activity, LeaderboardEntry, Team, Workout
 
 class Command(BaseCommand):
-    help = 'Populate the octofit_db database with test data'
+    help = 'Populate the database with test data'
 
     def handle(self, *args, **options):
+        call_command('migrate', run_syncdb=True, interactive=False, verbosity=0)
         User = get_user_model()
 
         LeaderboardEntry.objects.all().delete()
@@ -77,4 +79,4 @@ class Command(BaseCommand):
             LeaderboardEntry(user=users['Clark Kent'], team=dc, score=250, rank=2),
         ])
 
-        self.stdout.write(self.style.SUCCESS('octofit_db database populated with test data.'))
+        self.stdout.write(self.style.SUCCESS('Database populated with test data.'))
